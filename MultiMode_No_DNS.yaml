@@ -18,28 +18,13 @@ dns:
 
 # 请将您所有的 VLESS 代理节点放在这里。例如：
 proxies:
-  - name: JP-132.145.116.185-443
-    type: vless
-    server: 132.145.116.185
-    port: 443
-    uuid: dda223e1-3071-4c4b-96cf-89bd5fd83ed1
-    udp: false
-    tls: true
-    sni: sub.tezeexin.dpdns.org
-    network: ws
-    ws-opts:
-      path: "/?ed=2560&proxyip=121.189.235.248:17052"
-      headers:
-        Host: sub.tezeexin.dpdns.org
-        my-key: patnov-wukjy7-kiKrix
   # ... 省略了其他所有 VLESS 代理节点，请确保它们都在这里定义
   # 定义一个所有代理的列表，供下面的组引用（这是一个辅助变量，实际YAML中不会出现）
   # ALL_PROXIES_NAMES = [
-  #   "JP-132.145.116.185-443",
-  #   "US-96.45.189.184-443",
+  #   "JP-123.122.123.12-443",
+  #   "US-123.122.123.12-443",
   #   # ... 所有代理名称
   # ]
-
 
 proxy-groups:
   - name: 💖 ‍起飞选择
@@ -290,6 +275,31 @@ rule-providers:
     interval: 86400
     path: "./rules/ai.yaml"
 
+  # 📬 Telegram 规则集
+  Telegram:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Telegram.list"
+    interval: 86400
+    path: "./rules/telegram.yaml"
+    
+  # 🎥 Netflix 规则集
+  Netflix:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Netflix.list"
+    interval: 86400
+    path: "./rules/netflix.yaml"
+    
+  # 🧸 Disney++ 规则集
+  Disney++:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/DisneyPlus.list"
+    interval: 86400
+    path: "./rules/disney++.yaml"
+
+
   # 💖 ‍起飞选择 规则集 (GFWlist)
   ProxyGFWlist:
     type: http
@@ -312,6 +322,9 @@ rules:
   - RULE-SET,BilibiliHMT,🎬 ‍B站
   - RULE-SET,Bilibili,🎬 ‍B站
   - RULE-SET,AI,🤖 ‍AI
+  - RULE-SET,Telegram,📬 Telegram
+  - RULE-SET,Netflix,🎬 ‍Netflix
+  - RULE-SET,Disney++,🧸 ‍Disney++
   - RULE-SET,ProxyGFWlist,💖 ‍起飞选择
   - RULE-SET,ChinaDomain,⛰️ ‍墙内
   - RULE-SET,ChinaCompanyIp,⛰️ ‍墙内
