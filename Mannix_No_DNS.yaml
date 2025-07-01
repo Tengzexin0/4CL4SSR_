@@ -316,4 +316,4 @@ rules:
   - RULE-SET,ChinaDomain,⛰️ ‍墙内
   - RULE-SET,ChinaCompanyIp,⛰️ ‍墙内
   - GEOIP,CN,⛰️ ‍墙内,no-resolve # 注意：GEOIP规则语法不变
-  - FINAL,🌐 ‍未知站点
+  - MATCH,🌐 ‍未知站点
