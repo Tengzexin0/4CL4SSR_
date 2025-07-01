@@ -1,0 +1,319 @@
+# 您的顶部配置，例如：
+mixed-port: 7890
+socks-port: 7891
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+dns:
+    enable: true
+    ipv6: false
+    default-nameserver: [223.5.5.5, 119.29.29.29]
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    use-hosts: true
+    nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+    fallback: ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853']
+    fallback-filter: { geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] }
+
+# 请将您所有的 VLESS 代理节点放在这里。例如：
+proxies:
+  - name: JP-132.145.116.185-443
+    type: vless
+    server: 132.145.116.185
+    port: 443
+    uuid: dda223e1-3071-4c4b-96cf-89bd5fd83ed1
+    udp: false
+    tls: true
+    sni: sub.tezeexin.dpdns.org
+    network: ws
+    ws-opts:
+      path: "/?ed=2560&proxyip=121.189.235.248:17052"
+      headers:
+        Host: sub.tezeexin.dpdns.org
+        my-key: patnov-wukjy7-kiKrix
+  # ... 省略了其他所有 VLESS 代理节点，请确保它们都在这里定义
+  # 定义一个所有代理的列表，供下面的组引用（这是一个辅助变量，实际YAML中不会出现）
+  # ALL_PROXIES_NAMES = [
+  #   "JP-132.145.116.185-443",
+  #   "US-96.45.189.184-443",
+  #   # ... 所有代理名称
+  # ]
+
+
+proxy-groups:
+  - name: 💖 ‍起飞选择
+    type: select
+    proxies:
+      - 🍋 ‍超低延迟
+      - 💘 ‍指定落地
+      - 🇭🇰 ‍香港
+      - 🇹🇼 ‍台湾
+      - 🇰🇷 ‍韩国
+      - 🇸🇬 ‍新加坡
+      - 🇯🇵 ‍日本
+      - 🇺🇸 ‍美国
+      - 🎏 ‍其他
+      - DIRECT
+      - REJECT
+
+  - name: 🍋 ‍超低延迟
+    type: url-test
+    url: https://i.ytimg.com/generate_204
+    interval: 30
+    tolerance: 100
+    # 这里需要列出所有你可以用于超低延迟测试的代理
+    # 通常是所有代理，然后url-test会选择最快的
+    proxies:
+      # 请将这里替换为您所有代理的名称列表
+      
+  - name: 💘 ‍指定落地
+    type: select
+    # 'select' 类型组，成员通常由用户手动选择。
+    # 这里应列出所有可供选择的代理或代理组
+    proxies:
+      # 这里可以列出所有代理，或者你希望用户手动选择的特定代理
+      # 例如，再次使用所有代理
+      
+  - name: ⛰️ ‍墙内
+    type: select
+    proxies:
+      - DIRECT
+      - REJECT
+      - 💖 ‍起飞选择 # 注意这里引用的是您定义的组名
+
+  - name: 💩 ‍广告
+    type: select
+    proxies:
+      - REJECT
+      - ⛰️ ‍墙内
+      - 💖 ‍起飞选择
+
+  - name: 🎬 ‍B站
+    type: select
+    proxies:
+      - ⛰️ ‍墙内
+      - 🇭🇰 ‍香港
+      - 🇹🇼 ‍台湾
+      - 💖 ‍起飞选择
+
+  - name: 🤖 ‍AI
+    type: select
+    proxies:
+      - 🇺🇸 ‍美国
+      - 🇹🇼 ‍台湾
+      - 🇰🇷 ‍韩国
+      - 🇸🇬 ‍新加坡
+      - 🇯🇵 ‍日本
+      - 🎏 ‍其他
+      - 💖 ‍起飞选择
+      - ⛰️ ‍墙内
+
+  - name: 🌐 ‍未知站点
+    type: select
+    proxies:
+      - 💖 ‍起飞选择
+      - ⛰️ ‍墙内
+      - 💩 ‍广告
+
+  - name: 🇭🇰 ‍香港
+    type: url-test
+    url: https://i.ytimg.com/generate_204
+    interval: 15
+    tolerance: 100
+    # 这里必须列出所有代理名称，filter 会对其进行筛选
+    proxies:
+     
+    filter: 🇭🇰(?!.*(?!🇨🇳)[🇦-🇿]{2})
+
+  - name: 🇹🇼 ‍台湾
+    type: url-test
+    url: https://i.ytimg.com/generate_204
+    interval: 15
+    tolerance: 100
+    proxies:
+      # 同上，列出所有代理名称
+     
+    filter: 🇹🇼(?!.*(?!🇨🇳)[🇦-🇿]{2})
+
+  - name: 🇰🇷 ‍韩国
+    type: url-test
+    url: https://i.ytimg.com/generate_204
+    interval: 15
+    tolerance: 100
+    proxies:
+      # 同上，列出所有代理名称
+      
+    filter: 🇰🇷(?!.*[🇦-🇿]{2})
+
+  - name: 🇸🇬 ‍新加坡
+    type: url-test
+    url: https://i.ytimg.com/generate_204
+    interval: 15
+    tolerance: 100
+    proxies:
+      # 同上，列出所有代理名称
+     
+    filter: 🇸🇬(?!.*[🇦-🇿]{2})
+
+  - name: 🇯🇵 ‍日本
+    type: url-test
+    url: https://i.ytimg.com/generate_204
+    interval: 15
+    tolerance: 100
+    proxies:
+      # 同上，列出所有代理名称
+      
+    filter: 🇯🇵(?!.*[🇦-🇿]{2})
+
+  - name: 🇺🇸 ‍美国
+    type: url-test
+    url: https://i.ytimg.com/generate_204
+    interval: 15
+    tolerance: 300
+    proxies:
+      # 同上，列出所有代理名称
+     
+    filter: (🇺🇸|🇺🇲)(?!.*[🇦-🇿]{2})
+
+  - name: 🎏 ‍其他
+    type: url-test
+    url: https://i.ytimg.com/generate_204
+    interval: 30
+    tolerance: 100
+    proxies:
+      # 同上，列出所有代理名称
+    
+    filter: ^(?!.*(🇨🇳|🇭🇰|🇲🇴|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇺🇲)(?!.*[🇦-🇿]{2}))
+
+rule-providers:
+  # DIRECT 规则集
+  LocalAreaNetwork:
+    type: http
+    behavior: classical # 或者 domain/ipcidr，取决于列表内容
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Direct/LocalAreaNetwork.list"
+    interval: 86400
+    path: "./rules/local-area-network.yaml" # 本地保存路径，可自定义
+
+  ChinaOnly:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Direct/ChinaOnly.list"
+    interval: 86400
+    path: "./rules/china-only.yaml"
+
+  # ⛰️ ‍墙内 规则集
+  UnBan1:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/UnBan1.list"
+    interval: 86400
+    path: "./rules/unban1.yaml"
+
+  UnBan:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/UnBan.list"
+    interval: 86400
+    path: "./rules/unban.yaml"
+
+  GoogleCN:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/GoogleCN.list"
+    interval: 86400
+    path: "./rules/googlecn.yaml"
+
+  SteamCN:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/SteamCN.list"
+    interval: 86400
+    path: "./rules/steamcn.yaml"
+
+  ChinaDomain:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/ChinaDomain.list"
+    interval: 86400
+    path: "./rules/chinadomain.yaml"
+
+  ChinaCompanyIp:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/ChinaCompanyIp.list"
+    interval: 86400
+    path: "./rules/chinacompanyip.yaml"
+
+  # 💩 ‍广告 规则集
+  BanProgramAD1:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Advertise/BanProgramAD1.list"
+    interval: 86400
+    path: "./rules/banprogramad1.yaml"
+
+  BanAD:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Advertise/BanAD.list"
+    interval: 86400
+    path: "./rules/banad.yaml"
+
+  BanProgramAD:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Advertise/BanProgramAD.list"
+    interval: 86400
+    path: "./rules/banprogramad.yaml"
+
+  # 🎬 ‍B站 规则集
+  BilibiliHMT:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/BilibiliHMT.list"
+    interval: 86400
+    path: "./rules/bilibilihmt.yaml"
+
+  Bilibili:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/Bilibili.list"
+    interval: 86400
+    path: "./rules/bilibili.yaml"
+
+  # 🤖 ‍AI 规则集
+  AI:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/AI/AI.list"
+    interval: 86400
+    path: "./rules/ai.yaml"
+
+  # 💖 ‍起飞选择 规则集 (GFWlist)
+  ProxyGFWlist:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/ProxyGFWlist.list"
+    interval: 86400
+    path: "./rules/proxygfwlist.yaml"
+
+rules:
+  # 注意：这里的名称需要与上面 rule-providers 中定义的名称一致
+  - RULE-SET,LocalAreaNetwork,DIRECT
+  - RULE-SET,ChinaOnly,DIRECT
+  - RULE-SET,UnBan1,⛰️ ‍墙内
+  - RULE-SET,UnBan,⛰️ ‍墙内
+  - RULE-SET,BanProgramAD1,💩 ‍广告
+  - RULE-SET,BanAD,💩 ‍广告
+  - RULE-SET,BanProgramAD,💩 ‍广告
+  - RULE-SET,GoogleCN,⛰️ ‍墙内
+  - RULE-SET,SteamCN,⛰️ ‍墙内
+  - RULE-SET,BilibiliHMT,🎬 ‍B站
+  - RULE-SET,Bilibili,🎬 ‍B站
+  - RULE-SET,AI,🤖 ‍AI
+  - RULE-SET,ProxyGFWlist,💖 ‍起飞选择
+  - RULE-SET,ChinaDomain,⛰️ ‍墙内
+  - RULE-SET,ChinaCompanyIp,⛰️ ‍墙内
+  - GEOIP,CN,⛰️ ‍墙内,no-resolve # 注意：GEOIP规则语法不变
+  - FINAL,🌐 ‍未知站点
