@@ -289,7 +289,7 @@ rule-providers:
   AI:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/AI/AI.list"
+    url: "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/AI.list"
     interval: 86400
     path: "./rules/ai.yaml"
 
