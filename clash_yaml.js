@@ -1,14 +1,14 @@
 // DNS配置
 const dnsConfig = {
-    "enable": true
-    "ipv6": false
-    "default-nameserver": [223.5.5.5, 119.29.29.29]
-    "enhanced-mode": "fake-ip"
-    "fake-ip-range": "198.18.0.1/16"
-    "use-hosts": true
-    "nameserver": ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
-    "fallback": ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853']
-    "fallback-filter": { "geoip": true, "ipcidr": [240.0.0.0/4, 0.0.0.0/32] }
+    "enable": true,
+    "ipv6": false,
+    "default-nameserver": ['223.5.5.5', '119.29.29.29'],
+    "enhanced-mode": "fake-ip",
+    "fake-ip-range": "198.18.0.1/16",
+    "use-hosts": true,
+    "nameserver": ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query'],
+    "fallback": ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853'],
+    "fallback-filter": { "geoip": true, "ipcidr": ['240.0.0.0/4', '0.0.0.0/32'] },
 };
 // 规则集通用配置
 const ruleProviderCommon = {
@@ -162,31 +162,31 @@ const ruleProviders = {
     "behavior": "classical",
     "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml",
     "path": "./ruleset/blackmatrix7/openai.yaml"
-  }
+  },
   "bilibili": {
     ...ruleProviderCommon,
     "behavior": "classical",
     "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/Bilibili.list",
     "path": "./ruleset/blackmatrix7/bilibili.yaml"
-  }
+  },
   "bilibilihmt": {
     ...ruleProviderCommon,
     "behavior": "classical",
     "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/BilibiliHMT.list",
     "path": "./ruleset/blackmatrix7/bilibilihmt.yaml"
-  }
+  },
   "ai": {
     ...ruleProviderCommon,
     "behavior": "classical",
     "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/AI.list",
     "path": "./ruleset/blackmatrix7/ai.yaml"
-  }
+  },
   "netflix": {
     ...ruleProviderCommon,
     "behavior": "classical",
     "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Netflix.list",
     "path": "./ruleset/blackmatrix7/netflix.yaml"
-  }
+  },
   "disney+": {
     ...ruleProviderCommon,
     "behavior": "classical",
@@ -268,7 +268,7 @@ function main(config, profileName) {
       "type": "select",
       "proxies": ["延迟选优", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
       "include-all": false,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/omelette.svg"
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/heart.svg"
     },
     {
       ...groupBaseOption,
@@ -299,7 +299,7 @@ function main(config, profileName) {
       "type": "select",
       "proxies": ["延迟选优", "墙内直连", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
       "include-all": false,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/heart.svg"
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/omelette.svg"
     },
     {
       ...groupBaseOption,
@@ -341,7 +341,7 @@ function main(config, profileName) {
       "type": "select",
       "proxies": ["DIRECT", "节点选择", "延迟选优", "落地指定"],
       "include-all": false,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/adjust.svg"
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/sushi.svg"
     },
     {
       ...groupBaseOption,
@@ -372,7 +372,77 @@ function main(config, profileName) {
       "name": "广告过滤",
       "type": "select",
       "proxies": ["REJECT", "DIRECT"],
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/advertise.svg.svg"
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/advertise.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "US",
+      "type": "url-test",
+      "url": "https://i.ytimg.com/generate_204",
+      "interval": 30,
+      "tolerance": 100,
+      "include-all": true,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/us.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "JP",
+      "type": "url-test",
+      "url": "https://i.ytimg.com/generate_204",
+      "interval": 30,
+      "tolerance": 100,
+      "include-all": true,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/jp.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "HK",
+      "type": "url-test",
+      "url": "https://i.ytimg.com/generate_204",
+      "interval": 30,
+      "tolerance": 100,
+      "include-all": true,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/hk.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "TW",
+      "type": "url-test",
+      "url": "https://i.ytimg.com/generate_204",
+      "interval": 30,
+      "tolerance": 100,
+      "include-all": true,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/tw.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "KR",
+      "type": "url-test",
+      "url": "https://i.ytimg.com/generate_204",
+      "interval": 30,
+      "tolerance": 100,
+      "include-all": true,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/kr.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "SG",
+      "type": "url-test",
+      "url": "https://i.ytimg.com/generate_204",
+      "interval": 30,
+      "tolerance": 100,
+      "include-all": true,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/sg.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "其他",
+      "type": "url-test",
+      "url": "https://i.ytimg.com/generate_204",
+      "interval": 30,
+      "tolerance": 100,
+      "include-all": true,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/adjust.svg"
     },
     {
       ...groupBaseOption,
