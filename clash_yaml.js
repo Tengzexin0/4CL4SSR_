@@ -2,13 +2,41 @@
 const dnsConfig = {
     "enable": true,
     "ipv6": false,
-    "default-nameserver": ['223.5.5.5', '119.29.29.29'],
+    "listen": "0.0.0.0:1053",
+    "respect-rules": true,
+    "use-system-hosts": false,
+    "cache-algorithm": "arc",
     "enhanced-mode": "fake-ip",
     "fake-ip-range": "198.18.0.1/16",
-    "use-hosts": true,
-    "nameserver": ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query'],
-    "fallback": ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853'],
-    "fallback-filter": { "geoip": true, "ipcidr": ['240.0.0.0/4', '0.0.0.0/32'] },
+    "fake-ip-filter": [
+        // 本地主机/设备
+        "+.lan",
+        "+.local",
+        // Windows网络出现小地球图标
+        "+.msftconnecttest.com",
+        "+.msftncsi.com",
+        // QQ快速登录检测失败
+        "localhost.ptlogin2.qq.com",
+        "localhost.sec.qq.com",
+        // 追加以下条目
+        "+.in-addr.arpa",
+        "+.ip6.arpa",
+        "time.*.com",
+        "time.*.gov",
+        "pool.ntp.org",
+        // 微信快速登录检测失败
+        "localhost.work.weixin.qq.com"
+    ],
+    "default-nameserver":['https://223.5.5.5/dns-query', 'https://119.29.29.29/dns-query'],
+    "nameserver": ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853'],
+    "proxy-server-nameserver": ['https://223.5.5.5/dns-query', 'https://119.29.29.29/dns-query'], // 代理流量下使用国内 DoH，确保分流
+    "direct-nameserver": ["https://223.5.5.5/dns-query",'https://119.29.29.29/dns-query'], // 直连流量下使用国内 DoH
+    "nameserver-policy": {  // 关键修复：针对国内/私有域名使用国内 DoH
+        "geosite:private,cn": [
+            "https://223.5.5.5/dns-query",
+            "https://doh.pub/dns-query"
+        ]
+    }
 };
 // 规则集通用配置
 const ruleProviderCommon = {
@@ -201,15 +229,16 @@ const rules = [
   "DOMAIN-SUFFIX,xn--ngstr-lra8j.com,节点选择", // Google Play下载服务
   "DOMAIN-SUFFIX,github.io,节点选择", // Github Pages
   "DOMAIN,v2rayse.com,节点选择", // V2rayse节点工具
+  // "DOMAIN,doh.pub,节点选择",  // 可显式添加 doh.pub 规则，确保其连接走代理【可选】
   // Loyalsoldier 规则集
   "RULE-SET,applications,墙内直连",
   "RULE-SET,private,墙内直连",
+  "RULE-SET,unban,墙内直连",
+  "RULE-SET,unban1,墙内直连",
   "RULE-SET,reject,广告过滤",
   "RULE-SET,banprogramad1,广告过滤",
   "RULE-SET,banprogramad,广告过滤",
   "RULE-SET,banad,广告过滤",
-  "RULE-SET,unban,墙内直连",
-  "RULE-SET,unban1,墙内直连",
   "RULE-SET,googlecn,墙内直连",
   "RULE-SET,steamcn,墙内直连",
   "RULE-SET,icloud,微软服务",
@@ -222,8 +251,6 @@ const rules = [
   "RULE-SET,direct,墙内直连",
   "RULE-SET,lancidr,墙内直连,no-resolve",
   "RULE-SET,cncidr,墙内直连,no-resolve",
-  "RULE-SET,chinadomain,墙内直连",
-  "RULE-SET,chinacompanyip,墙内直连",
   "RULE-SET,telegramcidr,Telegram,no-resolve",
   "RULE-SET,bilibilihmt,Bilibili",
   "RULE-SET,bilibili,Bilibili",
@@ -231,7 +258,10 @@ const rules = [
   "RULE-SET,ai,AI",
   "RULE-SET,netflix,Netflix",
   "RULE-SET,disney+,Disney+",
+  "RULE-SET,chinadomain,墙内直连",
+  "RULE-SET,chinacompanyip,墙内直连",
   // 其他规则
+  "GEOSITE,CN,墙内直连",  // 添加 GEOSITE,CN 规则，提高国内域名的覆盖率
   "GEOIP,LAN,墙内直连,no-resolve",
   "GEOIP,CN,墙内直连,no-resolve",
   "MATCH,漏网之鱼"
@@ -293,6 +323,14 @@ function main(config, profileName) {
     },
     {
       ...groupBaseOption,
+      "name": "AI",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "墙内直连", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/omelette.svg"
+    },
+    {
+      ...groupBaseOption,
       "url": "https://chatgpt.com",
       "expected-status": "200",
       "name": "ChatGPT",
@@ -300,14 +338,6 @@ function main(config, profileName) {
       "proxies": ["节点选择", "延迟选优", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
       "include-all": false,
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/chatgpt.svg"
-    },
-    {
-      ...groupBaseOption,
-      "name": "AI",
-      "type": "select",
-      "proxies": ["节点选择", "延迟选优", "墙内直连", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
-      "include-all": false,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/omelette.svg"
     },
     {
       ...groupBaseOption,
@@ -349,6 +379,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
+      "filter": "(🇺🇸|🇺🇲)(?!.*[🇦-🇿]{2})",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/us.svg"
     },
     {
@@ -359,6 +390,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
+      "filter": "🇯🇵(?!.*[🇦-🇿]{2})",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/jp.svg"
     },
     {
@@ -369,6 +401,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
+      "filter": "🇭🇰(?!.*(?!🇨🇳)[🇦-🇿]{2})",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/hk.svg"
     },
     {
@@ -379,6 +412,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
+      "filter": "(🇹🇼|TW|Taiwan)(?!.*(?!🇨🇳)[🇦-🇿]{2})",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/tw.svg"
     },
     {
@@ -389,6 +423,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
+      "filter": "🇰🇷(?!.*[🇦-🇿]{2})",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/kr.svg"
     },
     {
@@ -399,6 +434,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
+      "filter": "🇸🇬(?!.*[🇦-🇿]{2})",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/sg.svg"
     },
     {
@@ -409,6 +445,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
+      "filter": "^(?!.*(🇨🇳|🇭🇰|🇲🇴|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇺🇲)(?!.*[🇦-🇿]{2}))",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/adjust.svg"
     },
      {
