@@ -24,6 +24,24 @@ const ruleProviders = {
     "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt",
     "path": "./ruleset/loyalsoldier/reject.yaml"
   },
+  "banad": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Advertise/BanAD.list",
+    "path": "./ruleset/loyalsoldier/banad.yaml"
+  },
+  "banprogramad": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Advertise/BanProgramAD.list",
+    "path": "./ruleset/loyalsoldier/banprogramad.yaml"
+  },
+  "banprogramad1": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Advertise/BanProgramAD1.list",
+    "path": "./ruleset/loyalsoldier/banprogramad1.yaml"
+  },
   "icloud": {
     ...ruleProviderCommon,
     "behavior": "domain",
@@ -60,11 +78,54 @@ const ruleProviders = {
     "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt",
     "path": "./ruleset/loyalsoldier/private.yaml"
   },
+  "unban": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/UnBan.list",
+    "path": "./ruleset/loyalsoldier/unban.yaml"
+  },
+  "unban1": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/UnBan1.list",
+    "path": "./ruleset/loyalsoldier/unban1.yaml"
+  },
+  "googlecn": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/GoogleCN.list",
+    "path": "./ruleset/loyalsoldier/googlecn.yaml"
+  },
+  "steamcn": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/SteamCN.list",
+    "path": "./ruleset/loyalsoldier/steamcn.yaml"
+  },
+  "chinadomain": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/ChinaDomain.list",
+    "path": "./ruleset/loyalsoldier/chinadomain.yaml"
+  },
+  "chinacompanyip": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/ChinaCompanyIp.list",
+    "path": "./ruleset/loyalsoldier/chinacompanyip.yaml"
+  },
+  
   "gfw": {
     ...ruleProviderCommon,
     "behavior": "domain",
     "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt",
     "path": "./ruleset/loyalsoldier/gfw.yaml"
+  },
+  "proxygfwlist": {
+    ...ruleProviderCommon,
+    "behavior": "domain",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/ProxyGFWlist.list",
+    "path": "./ruleset/loyalsoldier/proxygfwlist.yaml"
   },
   "tld-not-cn": {
     ...ruleProviderCommon,
@@ -102,6 +163,36 @@ const ruleProviders = {
     "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml",
     "path": "./ruleset/blackmatrix7/openai.yaml"
   }
+  "bilibili": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/Bilibili.list",
+    "path": "./ruleset/blackmatrix7/bilibili.yaml"
+  }
+  "bilibilihmt": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/BilibiliHMT.list",
+    "path": "./ruleset/blackmatrix7/bilibilihmt.yaml"
+  }
+  "ai": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/AI.list",
+    "path": "./ruleset/blackmatrix7/ai.yaml"
+  }
+  "netflix": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Netflix.list",
+    "path": "./ruleset/blackmatrix7/netflix.yaml"
+  }
+  "disney+": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/DisneyPlus.list",
+    "path": "./ruleset/blackmatrix7/disney+.yaml"
+  }
 };
 // 规则
 const rules = [
@@ -114,22 +205,37 @@ const rules = [
   // blackmatrix7 规则集
   "RULE-SET,openai,ChatGPT",
   // Loyalsoldier 规则集
-  "RULE-SET,applications,全局直连",
-  "RULE-SET,private,全局直连",
+  "RULE-SET,applications,墙内直连",
+  "RULE-SET,private,墙内直连",
   "RULE-SET,reject,广告过滤",
   "RULE-SET,icloud,微软服务",
   "RULE-SET,apple,苹果服务",
   "RULE-SET,google,谷歌服务",
   "RULE-SET,proxy,节点选择",
   "RULE-SET,gfw,节点选择",
+  "RULE-SET,proxygfwlist,节点选择",
   "RULE-SET,tld-not-cn,节点选择",
-  "RULE-SET,direct,全局直连",
-  "RULE-SET,lancidr,全局直连,no-resolve",
-  "RULE-SET,cncidr,全局直连,no-resolve",
-  "RULE-SET,telegramcidr,电报消息,no-resolve",
+  "RULE-SET,direct,墙内直连",
+  "RULE-SET,lancidr,墙内直连,no-resolve",
+  "RULE-SET,cncidr,墙内直连,no-resolve",
+  "RULE-SET,telegramcidr,Telegram,no-resolve",
+  "RULE-SET,bilibili,Bilibili",
+  "RULE-SET,bilibilihmt,Bilibili",
+  "RULE-SET,ai,AI",
+  "RULE-SET,netflix,Netflix",
+  "RULE-SET,disney+,Disney+",
+  "RULE-SET,unban,墙内直连",
+  "RULE-SET,unban1,墙内直连",
+  "RULE-SET,googlecn,墙内直连",
+  "RULE-SET,steamcn,墙内直连",
+  "RULE-SET,chinadomain,墙内直连",
+  "RULE-SET,chinacompanyip,墙内直连",
+  "RULE-SET,banprogramad1,广告过滤",
+  "RULE-SET,banprogramad,广告过滤",
+  "RULE-SET,banad,广告过滤",
   // 其他规则
-  "GEOIP,LAN,全局直连,no-resolve",
-  "GEOIP,CN,全局直连,no-resolve",
+  "GEOIP,LAN,墙内直连,no-resolve",
+  "GEOIP,CN,墙内直连,no-resolve",
   "MATCH,漏网之鱼"
 ];
 // 代理组通用配置
@@ -160,9 +266,9 @@ function main(config, profileName) {
       ...groupBaseOption,
       "name": "节点选择",
       "type": "select",
-      "proxies": ["延迟选优", "故障转移", "负载均衡(散列)", "负载均衡(轮询)"],
-      "include-all": true,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/adjust.svg"
+      "proxies": ["延迟选优", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/omelette.svg"
     },
     {
       ...groupBaseOption,
@@ -174,50 +280,50 @@ function main(config, profileName) {
     },
     {
       ...groupBaseOption,
-      "name": "故障转移",
-      "type": "fallback",
-      "include-all": true,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/ambulance.svg"
-    },
-    {
-      ...groupBaseOption,
-      "name": "负载均衡(散列)",
-      "type": "load-balance",
-      "strategy": "consistent-hashing",
-      "include-all": true,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/merry_go.svg"
-    },
-    {
-      ...groupBaseOption,
-      "name": "负载均衡(轮询)",
-      "type": "load-balance",
-      "strategy": "round-robin",
-      "include-all": true,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/balance.svg"
-    },
-    {
-      ...groupBaseOption,
-      "name": "谷歌服务",
+      "name": "落地指定",
       "type": "select",
-      "proxies": ["节点选择", "延迟选优", "故障转移", "负载均衡(散列)", "负载均衡(轮询)", "全局直连"],
       "include-all": true,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/google.svg"
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/departure.svg"
     },
     {
       ...groupBaseOption,
-      "name": "国外媒体",
+      "name": "Bilibili",
       "type": "select",
-      "proxies": ["节点选择", "延迟选优", "故障转移", "负载均衡(散列)", "负载均衡(轮询)", "全局直连"],
-      "include-all": true,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/omelette.svg"
+      "proxies": ["墙内直连", "节点选择", "延迟选优", "HK", "TW"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/bilibili.svg"
     },
     {
       ...groupBaseOption,
-      "name": "电报消息",
+      "name": "AI",
       "type": "select",
-      "proxies": ["节点选择", "延迟选优", "故障转移", "负载均衡(散列)", "负载均衡(轮询)", "全局直连"],
-      "include-all": true,
+      "proxies": ["延迟选优", "墙内直连", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/heart.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "Telegram",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "落地指定"],
+      "include-all": false,
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/telegram.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "Netflix",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "落地指定"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/netflix.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "Disney+",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "落地指定"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/disney.svg"
     },
     {
       ...groupBaseOption,
@@ -225,54 +331,55 @@ function main(config, profileName) {
       "expected-status": "200",
       "name": "ChatGPT",
       "type": "select",
-      "include-all": true,
+      "include-all": false,
       "filter": "AD|🇦🇩|AE|🇦🇪|AF|🇦🇫|AG|🇦🇬|AL|🇦🇱|AM|🇦🇲|AO|🇦🇴|AR|🇦🇷|AT|🇦🇹|AU|🇦🇺|AZ|🇦🇿|BA|🇧🇦|BB|🇧🇧|BD|🇧🇩|BE|🇧🇪|BF|🇧🇫|BG|🇧🇬|BH|🇧🇭|BI|🇧🇮|BJ|🇧🇯|BN|🇧🇳|BO|🇧🇴|BR|🇧🇷|BS|🇧🇸|BT|🇧🇹|BW|🇧🇼|BZ|🇧🇿|CA|🇨🇦|CD|🇨🇩|CF|🇨🇫|CG|🇨🇬|CH|🇨🇭|CI|🇨🇮|CL|🇨🇱|CM|🇨🇲|CO|🇨🇴|CR|🇨🇷|CV|🇨🇻|CY|🇨🇾|CZ|🇨🇿|DE|🇩🇪|DJ|🇩🇯|DK|🇩🇰|DM|🇩🇲|DO|🇩🇴|DZ|🇩🇿|EC|🇪🇨|EE|🇪🇪|EG|🇪🇬|ER|🇪🇷|ES|🇪🇸|ET|🇪🇹|FI|🇫🇮|FJ|🇫🇯|FM|🇫🇲|FR|🇫🇷|GA|🇬🇦|GB|🇬🇧|GD|🇬🇩|GE|🇬🇪|GH|🇬🇭|GM|🇬🇲|GN|🇬🇳|GQ|🇬🇶|GR|🇬🇷|GT|🇬🇹|GW|🇬🇼|GY|🇬🇾|HN|🇭🇳|HR|🇭🇷|HT|🇭🇹|HU|🇭🇺|ID|🇮🇩|IE|🇮🇪|IL|🇮🇱|IN|🇮🇳|IQ|🇮🇶|IS|🇮🇸|IT|🇮🇹|JM|🇯🇲|JO|🇯🇴|JP|🇯🇵|KE|🇰🇪|KG|🇰🇬|KH|🇰🇭|KI|🇰🇮|KM|🇰🇲|KN|🇰🇳|KR|🇰🇷|KW|🇰🇼|KZ|🇰🇿|LA|🇱🇦|LB|🇱🇧|LC|🇱🇨|LI|🇱🇮|LK|🇱🇰|LR|🇱🇷|LS|🇱🇸|LT|🇱🇹|LU|🇱🇺|LV|🇱🇻|LY|🇱🇾|MA|🇲🇦|MC|🇲🇨|MD|🇲🇩|ME|🇲🇪|MG|🇲🇬|MH|🇲🇭|MK|🇲🇰|ML|🇲🇱|MM|🇲🇲|MN|🇲🇳|MR|🇲🇷|MT|🇲🇹|MU|🇲🇺|MV|🇲🇻|MW|🇲🇼|MX|🇲🇽|MY|🇲🇾|MZ|🇲🇿|NA|🇳🇦|NE|🇳🇪|NG|🇳🇬|NI|🇳🇮|NL|🇳🇱|NO|🇳🇴|NP|🇳🇵|NR|🇳🇷|NZ|🇳🇿|OM|🇴🇲|PA|🇵🇦|PE|🇵🇪|PG|🇵🇬|PH|🇵🇭|PK|🇵🇰|PL|🇵🇱|PS|🇵🇸|PT|🇵🇹|PW|🇵🇼|PY|🇵🇾|QA|🇶🇦|RO|🇷🇴|RS|🇷🇸|RW|🇷🇼|SA|🇸🇦|SB|🇸🇧|SC|🇸🇨|SD|🇸🇩|SE|🇸🇪|SG|🇸🇬|SI|🇸🇮|SK|🇸🇰|SL|🇸🇱|SM|🇸🇲|SN|🇸🇳|SO|🇸🇴|SR|🇸🇷|SS|🇸🇸|ST|🇸🇹|SV|🇸🇻|SZ|🇸🇿|TD|🇹🇩|TG|🇹🇬|TH|🇹🇭|TJ|🇹🇯|TL|🇹🇱|TM|🇹🇲|TN|🇹🇳|TO|🇹🇴|TR|🇹🇷|TT|🇹🇹|TV|🇹🇻|TW|🇹🇼|TZ|🇹🇿|UA|🇺🇦|UG|🇺🇬|US|🇺🇸|UY|🇺🇾|UZ|🇺🇿|VA|🇻🇦|VC|🇻🇨|VN|🇻🇳|VU|🇻🇺|WS|🇼🇸|YE|🇾🇪|ZA|🇿🇦|ZM|🇿🇲|ZW|🇿🇼",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/chatgpt.svg"
     },
     {
       ...groupBaseOption,
-      "name": "微软服务",
+      "name": "墙内直连",
       "type": "select",
-      "proxies": ["全局直连", "节点选择", "延迟选优", "故障转移", "负载均衡(散列)", "负载均衡(轮询)"],
-      "include-all": true,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/microsoft.svg"
+      "proxies": ["DIRECT", "节点选择", "延迟选优", "落地指定"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/adjust.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "谷歌服务",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "落地指定", "墙内直连"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/google.svg"
     },
     {
       ...groupBaseOption,
       "name": "苹果服务",
       "type": "select",
-      "proxies": ["节点选择", "延迟选优", "故障转移", "负载均衡(散列)", "负载均衡(轮询)", "全局直连"],
-      "include-all": true,
+      "proxies": ["节点选择", "延迟选优", "落地指定"],
+      "include-all": false,
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/apple.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "微软服务",
+      "type": "select",
+      "proxies": ["墙内直连", "节点选择", "延迟选优", "落地指定"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/microsoft.svg"
     },
     {
       ...groupBaseOption,
       "name": "广告过滤",
       "type": "select",
       "proxies": ["REJECT", "DIRECT"],
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons//bug.svg"
-    },
-    {
-      ...groupBaseOption,
-      "name": "全局直连",
-      "type": "select",
-      "proxies": ["DIRECT", "节点选择", "延迟选优", "故障转移", "负载均衡(散列)", "负载均衡(轮询)"],
-      "include-all": true,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/link.svg"
-    },
-    {
-      ...groupBaseOption,
-      "name": "全局拦截",
-      "type": "select",
-      "proxies": ["REJECT", "DIRECT"],
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/block.svg"
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/advertise.svg.svg"
     },
     {
       ...groupBaseOption,
       "name": "漏网之鱼",
       "type": "select",
-      "proxies": ["节点选择", "延迟选优", "故障转移", "负载均衡(散列)", "负载均衡(轮询)", "全局直连"],
-      "include-all": true,
+      "proxies": ["节点选择", "延迟选优", "墙内直连", "全局拦截"],
+      "include-all": false,
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/fish.svg"
     }
   ];
