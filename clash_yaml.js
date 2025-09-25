@@ -114,7 +114,6 @@ const ruleProviders = {
     "url": "https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/main/Clash/Domestic/ChinaCompanyIp.list",
     "path": "./ruleset/loyalsoldier/chinacompanyip.yaml"
   },
-  
   "gfw": {
     ...ruleProviderCommon,
     "behavior": "domain",
@@ -161,7 +160,7 @@ const ruleProviders = {
     ...ruleProviderCommon,
     "behavior": "classical",
     "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml",
-    "path": "./ruleset/blackmatrix7/openai.yaml"
+    "path": "./ruleset/loyalsoldier/openai.yaml"
   },
   "bilibili": {
     ...ruleProviderCommon,
@@ -202,12 +201,17 @@ const rules = [
   "DOMAIN-SUFFIX,xn--ngstr-lra8j.com,节点选择", // Google Play下载服务
   "DOMAIN-SUFFIX,github.io,节点选择", // Github Pages
   "DOMAIN,v2rayse.com,节点选择", // V2rayse节点工具
-  // blackmatrix7 规则集
-  "RULE-SET,openai,ChatGPT",
   // Loyalsoldier 规则集
   "RULE-SET,applications,墙内直连",
   "RULE-SET,private,墙内直连",
   "RULE-SET,reject,广告过滤",
+  "RULE-SET,banprogramad1,广告过滤",
+  "RULE-SET,banprogramad,广告过滤",
+  "RULE-SET,banad,广告过滤",
+  "RULE-SET,unban,墙内直连",
+  "RULE-SET,unban1,墙内直连",
+  "RULE-SET,googlecn,墙内直连",
+  "RULE-SET,steamcn,墙内直连",
   "RULE-SET,icloud,微软服务",
   "RULE-SET,apple,苹果服务",
   "RULE-SET,google,谷歌服务",
@@ -218,21 +222,15 @@ const rules = [
   "RULE-SET,direct,墙内直连",
   "RULE-SET,lancidr,墙内直连,no-resolve",
   "RULE-SET,cncidr,墙内直连,no-resolve",
+  "RULE-SET,chinadomain,墙内直连",
+  "RULE-SET,chinacompanyip,墙内直连",
   "RULE-SET,telegramcidr,Telegram,no-resolve",
-  "RULE-SET,bilibili,Bilibili",
   "RULE-SET,bilibilihmt,Bilibili",
+  "RULE-SET,bilibili,Bilibili",
+  "RULE-SET,openai,ChatGPT",
   "RULE-SET,ai,AI",
   "RULE-SET,netflix,Netflix",
   "RULE-SET,disney+,Disney+",
-  "RULE-SET,unban,墙内直连",
-  "RULE-SET,unban1,墙内直连",
-  "RULE-SET,googlecn,墙内直连",
-  "RULE-SET,steamcn,墙内直连",
-  "RULE-SET,chinadomain,墙内直连",
-  "RULE-SET,chinacompanyip,墙内直连",
-  "RULE-SET,banprogramad1,广告过滤",
-  "RULE-SET,banprogramad,广告过滤",
-  "RULE-SET,banad,广告过滤",
   // 其他规则
   "GEOIP,LAN,墙内直连,no-resolve",
   "GEOIP,CN,墙内直连,no-resolve",
@@ -295,9 +293,19 @@ function main(config, profileName) {
     },
     {
       ...groupBaseOption,
+      "url": "https://chatgpt.com",
+      "expected-status": "200",
+      "name": "ChatGPT",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/chatgpt.svg"
+    },
+    {
+      ...groupBaseOption,
       "name": "AI",
       "type": "select",
-      "proxies": ["延迟选优", "墙内直连", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
+      "proxies": ["节点选择", "延迟选优", "墙内直连", "HK", "TW", "US", "KR", "JP", "SG", "其他"],
       "include-all": false,
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/omelette.svg"
     },
@@ -324,16 +332,6 @@ function main(config, profileName) {
       "proxies": ["节点选择", "延迟选优", "落地指定"],
       "include-all": false,
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/disney.svg"
-    },
-    {
-      ...groupBaseOption,
-      "url": "https://chatgpt.com",
-      "expected-status": "200",
-      "name": "ChatGPT",
-      "type": "select",
-      "include-all": false,
-      "filter": "AD|🇦🇩|AE|🇦🇪|AF|🇦🇫|AG|🇦🇬|AL|🇦🇱|AM|🇦🇲|AO|🇦🇴|AR|🇦🇷|AT|🇦🇹|AU|🇦🇺|AZ|🇦🇿|BA|🇧🇦|BB|🇧🇧|BD|🇧🇩|BE|🇧🇪|BF|🇧🇫|BG|🇧🇬|BH|🇧🇭|BI|🇧🇮|BJ|🇧🇯|BN|🇧🇳|BO|🇧🇴|BR|🇧🇷|BS|🇧🇸|BT|🇧🇹|BW|🇧🇼|BZ|🇧🇿|CA|🇨🇦|CD|🇨🇩|CF|🇨🇫|CG|🇨🇬|CH|🇨🇭|CI|🇨🇮|CL|🇨🇱|CM|🇨🇲|CO|🇨🇴|CR|🇨🇷|CV|🇨🇻|CY|🇨🇾|CZ|🇨🇿|DE|🇩🇪|DJ|🇩🇯|DK|🇩🇰|DM|🇩🇲|DO|🇩🇴|DZ|🇩🇿|EC|🇪🇨|EE|🇪🇪|EG|🇪🇬|ER|🇪🇷|ES|🇪🇸|ET|🇪🇹|FI|🇫🇮|FJ|🇫🇯|FM|🇫🇲|FR|🇫🇷|GA|🇬🇦|GB|🇬🇧|GD|🇬🇩|GE|🇬🇪|GH|🇬🇭|GM|🇬🇲|GN|🇬🇳|GQ|🇬🇶|GR|🇬🇷|GT|🇬🇹|GW|🇬🇼|GY|🇬🇾|HN|🇭🇳|HR|🇭🇷|HT|🇭🇹|HU|🇭🇺|ID|🇮🇩|IE|🇮🇪|IL|🇮🇱|IN|🇮🇳|IQ|🇮🇶|IS|🇮🇸|IT|🇮🇹|JM|🇯🇲|JO|🇯🇴|JP|🇯🇵|KE|🇰🇪|KG|🇰🇬|KH|🇰🇭|KI|🇰🇮|KM|🇰🇲|KN|🇰🇳|KR|🇰🇷|KW|🇰🇼|KZ|🇰🇿|LA|🇱🇦|LB|🇱🇧|LC|🇱🇨|LI|🇱🇮|LK|🇱🇰|LR|🇱🇷|LS|🇱🇸|LT|🇱🇹|LU|🇱🇺|LV|🇱🇻|LY|🇱🇾|MA|🇲🇦|MC|🇲🇨|MD|🇲🇩|ME|🇲🇪|MG|🇲🇬|MH|🇲🇭|MK|🇲🇰|ML|🇲🇱|MM|🇲🇲|MN|🇲🇳|MR|🇲🇷|MT|🇲🇹|MU|🇲🇺|MV|🇲🇻|MW|🇲🇼|MX|🇲🇽|MY|🇲🇾|MZ|🇲🇿|NA|🇳🇦|NE|🇳🇪|NG|🇳🇬|NI|🇳🇮|NL|🇳🇱|NO|🇳🇴|NP|🇳🇵|NR|🇳🇷|NZ|🇳🇿|OM|🇴🇲|PA|🇵🇦|PE|🇵🇪|PG|🇵🇬|PH|🇵🇭|PK|🇵🇰|PL|🇵🇱|PS|🇵🇸|PT|🇵🇹|PW|🇵🇼|PY|🇵🇾|QA|🇶🇦|RO|🇷🇴|RS|🇷🇸|RW|🇷🇼|SA|🇸🇦|SB|🇸🇧|SC|🇸🇨|SD|🇸🇩|SE|🇸🇪|SG|🇸🇬|SI|🇸🇮|SK|🇸🇰|SL|🇸🇱|SM|🇸🇲|SN|🇸🇳|SO|🇸🇴|SR|🇸🇷|SS|🇸🇸|ST|🇸🇹|SV|🇸🇻|SZ|🇸🇿|TD|🇹🇩|TG|🇹🇬|TH|🇹🇭|TJ|🇹🇯|TL|🇹🇱|TM|🇹🇲|TN|🇹🇳|TO|🇹🇴|TR|🇹🇷|TT|🇹🇹|TV|🇹🇻|TW|🇹🇼|TZ|🇹🇿|UA|🇺🇦|UG|🇺🇬|US|🇺🇸|UY|🇺🇾|UZ|🇺🇿|VA|🇻🇦|VC|🇻🇨|VN|🇻🇳|VU|🇻🇺|WS|🇼🇸|YE|🇾🇪|ZA|🇿🇦|ZM|🇿🇲|ZW|🇿🇼",
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/chatgpt.svg"
     },
     {
       ...groupBaseOption,
