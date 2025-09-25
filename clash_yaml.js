@@ -343,37 +343,6 @@ function main(config, profileName) {
     },
     {
       ...groupBaseOption,
-      "name": "谷歌服务",
-      "type": "select",
-      "proxies": ["节点选择", "延迟选优", "落地指定", "墙内直连"],
-      "include-all": false,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/google.svg"
-    },
-    {
-      ...groupBaseOption,
-      "name": "苹果服务",
-      "type": "select",
-      "proxies": ["节点选择", "延迟选优", "落地指定"],
-      "include-all": false,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/apple.svg"
-    },
-    {
-      ...groupBaseOption,
-      "name": "微软服务",
-      "type": "select",
-      "proxies": ["墙内直连", "节点选择", "延迟选优", "落地指定"],
-      "include-all": false,
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/microsoft.svg"
-    },
-    {
-      ...groupBaseOption,
-      "name": "广告过滤",
-      "type": "select",
-      "proxies": ["REJECT", "DIRECT"],
-      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/advertise.svg"
-    },
-    {
-      ...groupBaseOption,
       "name": "US",
       "type": "url-test",
       "url": "https://i.ytimg.com/generate_204",
@@ -441,6 +410,37 @@ function main(config, profileName) {
       "tolerance": 100,
       "include-all": true,
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/adjust.svg"
+    },
+     {
+      ...groupBaseOption,
+      "name": "谷歌服务",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "落地指定", "墙内直连"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/google.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "苹果服务",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "落地指定"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/apple.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "微软服务",
+      "type": "select",
+      "proxies": ["墙内直连", "节点选择", "延迟选优", "落地指定"],
+      "include-all": false,
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/microsoft.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "广告过滤",
+      "type": "select",
+      "proxies": ["REJECT", "DIRECT"],
+      "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/advertise.svg"
     },
     {
       ...groupBaseOption,
