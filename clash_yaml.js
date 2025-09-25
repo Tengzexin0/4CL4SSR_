@@ -446,7 +446,7 @@ function main(config, profileName) {
       ...groupBaseOption,
       "name": "漏网之鱼",
       "type": "select",
-      "proxies": ["节点选择", "延迟选优", "墙内直连", "全局拦截"],
+      "proxies": ["节点选择", "延迟选优", "墙内直连", "广告过滤"],
       "include-all": false,
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/fish.svg"
     }
