@@ -1,4 +1,4 @@
-【clash_yaml】大图标多国家多媒体配置：https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/refs/heads/main/clash_yaml.js
+【clash_yaml】大图标多国家多媒体 js格式配置：https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/refs/heads/main/clash_yaml.js
 
 【ACL4SSR_Online_Full_Mannix_No_DNS_Leak】热门地区和热门媒体细分规则：https://raw.githubusercontent.com/Tengzexin0/4CL4SSR_/refs/heads/main/ACL4SSR_Online_Full_Mannix_No_DNS_Leak.ini
 
