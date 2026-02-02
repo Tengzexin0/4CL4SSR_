@@ -379,7 +379,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
-      "filter": "(🇺🇸|🇺🇲)(?!.*[🇦-🇿]{2})",
+      "filter": "(?i)(美國|美国|US|USA|United ?States|美|🇺🇸)(?!.*(中国|大陸|CN|🇨🇳))",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/us.svg"
     },
     {
@@ -390,7 +390,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
-      "filter": "🇯🇵(?!.*[🇦-🇿]{2})",
+      "filter": "(?i)(日本|JP|Japan|🇯🇵)(?!.*(中国|大陸|CN|🇨🇳))",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/jp.svg"
     },
     {
@@ -401,7 +401,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
-      "filter": "🇭🇰(?!.*(?!🇨🇳)[🇦-🇿]{2})",
+      "filter": "(?i)(香港|HK|Hong ?Kong|🇭🇰)(?!.*(中国|大陸|CN|🇨🇳))",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/hk.svg"
     },
     {
@@ -412,7 +412,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
-      "filter": "(🇹🇼|TW|Taiwan)(?!.*(?!🇨🇳)[🇦-🇿]{2})",
+      "filter": "(?i)(台灣|台湾|TW|Taiwan|臺湾|🇹🇼)(?!.*(中国|大陸|CN|🇨🇳))",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/tw.svg"
     },
     {
@@ -423,7 +423,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
-      "filter": "🇰🇷(?!.*[🇦-🇿]{2})",
+      "filter": "(?i)(韓國|韩国|KR|Korea|南韓|🇰🇷)(?!.*(中国|大陸|CN|🇨🇳))",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/kr.svg"
     },
     {
@@ -434,7 +434,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
-      "filter": "🇸🇬(?!.*[🇦-🇿]{2})",
+      "filter": "(?i)(新加坡|SG|Singapore|狮城|🇸🇬)(?!.*(中国|大陸|CN|🇨🇳))",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/sg.svg"
     },
     {
@@ -445,7 +445,7 @@ function main(config, profileName) {
       "interval": 30,
       "tolerance": 100,
       "include-all": true,
-      "filter": "^(?!.*(🇨🇳|🇭🇰|🇲🇴|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇺🇲)(?!.*[🇦-🇿]{2}))",
+      "filter": "^(?!.*(?i)(HK|香港|Hong ?Kong|🇭🇰|TW|台灣|台湾|Taiwan|🇹🇼|KR|韓國|韩国|Korea|🇰🇷|JP|日本|Japan|🇯🇵|SG|新加坡|Singapore|🇸🇬|US|美國|美国|USA|United ?States|🇺🇸|CN|中国|大陸|🇨🇳)).*$",
       "icon": "https://cdn.jsdelivr.net/gh/Tengzexin0/jsdelivrcdn_repository@main/assets/icons/adjust.svg"
     },
      {
