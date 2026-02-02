@@ -127,7 +127,7 @@ proxy-groups:
     # 这里必须列出所有代理名称，filter 会对其进行筛选
     proxies:
      
-    filter: 🇭🇰(?!.*(?!🇨🇳)[🇦-🇿]{2})
+    filter: (?i)(香港|HK|Hong ?Kong|🇭🇰)(?!.*(中国|大陸|CN|🇨🇳))
 
   - name: 🇹🇼 ‍台湾
     type: url-test
@@ -137,7 +137,7 @@ proxy-groups:
     proxies:
       # 同上，列出所有代理名称
      
-    filter: 🇹🇼(?!.*(?!🇨🇳)[🇦-🇿]{2})
+    filter: (?i)(台灣|台湾|TW|Taiwan|臺湾|🇹🇼)(?!.*(中国|大陸|CN|🇨🇳))
 
   - name: 🇰🇷 ‍韩国
     type: url-test
@@ -147,7 +147,7 @@ proxy-groups:
     proxies:
       # 同上，列出所有代理名称
       
-    filter: 🇰🇷(?!.*[🇦-🇿]{2})
+    filter: (?i)(韓國|韩国|KR|Korea|南韓|🇰🇷)(?!.*(中国|大陸|CN|🇨🇳))
 
   - name: 🇸🇬 ‍新加坡
     type: url-test
@@ -157,7 +157,7 @@ proxy-groups:
     proxies:
       # 同上，列出所有代理名称
      
-    filter: 🇸🇬(?!.*[🇦-🇿]{2})
+    filter: (?i)(新加坡|SG|Singapore|狮城|🇸🇬)(?!.*(中国|大陸|CN|🇨🇳))
 
   - name: 🇯🇵 ‍日本
     type: url-test
@@ -167,7 +167,7 @@ proxy-groups:
     proxies:
       # 同上，列出所有代理名称
       
-    filter: 🇯🇵(?!.*[🇦-🇿]{2})
+    filter: (?i)(日本|JP|Japan|🇯🇵)(?!.*(中国|大陸|CN|🇨🇳))
 
   - name: 🇺🇸 ‍美国
     type: url-test
@@ -177,7 +177,7 @@ proxy-groups:
     proxies:
       # 同上，列出所有代理名称
      
-    filter: (🇺🇸|🇺🇲)(?!.*[🇦-🇿]{2})
+    filter: (?i)(美國|美国|US|USA|United ?States|美|🇺🇸)(?!.*(中国|大陸|CN|🇨🇳))
 
   - name: 🎏 ‍其他
     type: url-test
@@ -187,7 +187,7 @@ proxy-groups:
     proxies:
       # 同上，列出所有代理名称
     
-    filter: ^(?!.*(🇨🇳|🇭🇰|🇲🇴|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇺🇲)(?!.*[🇦-🇿]{2}))
+    filter: ^(?!.*(?i)(HK|香港|Hong ?Kong|🇭🇰|TW|台灣|台湾|Taiwan|🇹🇼|KR|韓國|韩国|Korea|🇰🇷|JP|日本|Japan|🇯🇵|SG|新加坡|Singapore|🇸🇬|US|美國|美国|USA|United ?States|🇺🇸|CN|中国|大陸|🇨🇳)).*$
 
 rule-providers:
   # DIRECT 规则集
